@@ -1,0 +1,121 @@
+-- Exploratory Data Analysis
+-- Dataset: layoffs_staging2
+-- The layoffs_staging2 table is a cleaned and preprocessed version of the raw layoff_staging data.
+-- I have cleaned it and added it in the Data_Cleaning repository.
+-- Objective: To explore and analyze layoff trends using SQL queries.
+
+-- WHY THESE ANALYSES?
+
+-- To identify patterns in tech layoffs by company, industry, and country.
+-- To track how layoffs evolved over time (monthly, yearly).
+-- To spot companies that laid off entire workforces.
+-- To rank and filter top contributors to layoffs.
+-- To inform business analysts, job seekers, and policymakers.
+
+-- This SQL analysis supports data-driven insights and can help guide business strategy, career decisions, or further data visualization projects.
+
+
+
+select * 
+from layoffs_staging2;
+-- Purpose: View all data. A general inspection of the dataset.
+
+select Max(total_laid_off), Max(percentage_laid_off)
+from layoffs_staging2;
+-- Purpose: Find maximum layoffs and max percentage (helps identify companies that laid off 100% of staff).
+
+select * 
+from layoffs_staging2
+where percentage_laid_off=1
+order by total_laid_off desc;
+-- Purpose: Identify companies that laid off their entire workforce, sorted by size.
+
+select company, sum(total_laid_off)
+from layoffs_staging2
+group by company
+order by 2 desc;
+-- Purpose: See which companies laid off the most people in total.
+
+select Min(`date`),Max(`date`)
+from layoffs_staging2;
+-- Purpose: Understand the time span of the dataset.
+
+select industry, sum(total_laid_off)
+from layoffs_staging2
+group by industry
+order by 2 desc;
+-- Purpose: Identify industries with the highest number of layoffs.
+
+select country, sum(total_laid_off)
+from layoffs_staging2
+group by country
+order by 2 desc;
+-- Purpose: Find the countries most affected by layoffs.
+
+select year(`date`), sum(total_laid_off)
+from layoffs_staging2
+group by year(`date`)
+order by 1 desc;
+-- Purpose: View year-wise layoffs trend.
+
+select stage, sum(total_laid_off)
+from layoffs_staging2
+group by stage
+order by 2 desc;
+-- Purpose: Determine which funding stages (Seed, Series A, etc.) faced the most layoffs.
+
+
+select substring(`date`,1,7) as `MONTH`, sum(total_laid_off)
+from layoffs_staging2
+where substring(`date`,1,7)  is not null
+group by `MONTH`
+order by 1 desc;
+-- Purpose: View month-wise layoff totals for trend analysis.
+
+with Rolling_Total as
+(
+select substring(`date`,1,7) as `MONTH`, sum(total_laid_off) as total_off
+from layoffs_staging2
+where substring(`date`,1,7)  is not null
+group by `MONTH`
+order by 1 desc
+)
+select `MONTH`, total_off , Sum(total_off) over(order by `MONTH`) as rolling_total
+from Rolling_Total;
+-- Purpose: Calculate a running total of layoffs to see cumulative impact over time.
+
+select company, year(`date`), sum(total_laid_off)
+from layoffs_staging2
+group by company, year(`date`)
+order by 3 desc;
+-- Purpose: Show how layoffs varied per company each year.
+
+with Company_Year(company, years, total_laid_off) as
+(
+select company, year(`date`), sum(total_laid_off)
+from layoffs_staging2
+group by company, year(`date`)
+)
+select *, 
+dense_rank() over(partition by years order by total_laid_off desc) as Ranking
+from Company_Year
+where years is not null
+order by Ranking asc;
+-- Purpose: Rank companies by total layoffs per year.
+
+with Company_Year(company, years, total_laid_off) as
+(
+select company, year(`date`), sum(total_laid_off)
+from layoffs_staging2
+group by company, year(`date`)
+), Company_Year_RAnk as
+(
+select *, 
+dense_rank() over(partition by years order by total_laid_off desc) as Ranking
+from Company_Year
+where years is not null
+)
+select * 
+from Company_Year_Rank
+where Ranking <=5;
+-- Purpose: Identify top 5 companies with highest layoffs each year.
