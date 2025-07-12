@@ -1,77 +1,77 @@
-# 📊 Exploratory Data Analysis (EDA) Projects
+# 📉 EDA on Layoffs Dataset
 
-A collection of EDA (Exploratory Data Analysis) projects performed using Python, Pandas, Matplotlib, Seaborn, and other data visualization tools.
-
----
-
-## ✅ Features
-
-- Real-world datasets
-- Data cleaning and preprocessing
-- In-depth exploratory data analysis
-- Visualizations using Seaborn and Matplotlib
-- Insights and observations for business understanding
+This project presents an Exploratory Data Analysis (EDA) on a dataset of global layoffs. The goal is to extract patterns, identify trends, and draw insights related to tech layoffs across different countries, companies, and time periods.
 
 ---
 
-## 🛠️ Getting Started Locally
+## 📂 Dataset Overview
 
-To run these projects on your machine:
+- **Source:** Kaggle ([Layoffs Dataset](https://www.kaggle.com/datasets/salimwid/layoffs-2022))
+- **Fields Include:**
+  - Company
+  - Industry
+  - Total Laid Off
+  - Percentage Laid Off
+  - Country
+  - Date
+  - Stage (e.g., Series A, B, IPO, etc.)
+
+---
+
+## 🔍 Analysis Objectives
+
+- Identify which industries were most affected
+- Analyze layoff trends over time
+- Explore layoffs by funding stage and geography
+- Visualize total layoffs per country/company
+
+---
+
+## 📊 Key Insights
+
+- The tech industry saw the largest number of layoffs.
+- The majority of layoffs occurred post-2022.
+- Late-stage startups and public companies were significantly impacted.
+- Certain countries (like the US and India) had consistently higher layoff numbers.
+
+---
+
+## 📈 Tools & Libraries Used
+
+- Python 🐍
+- Pandas
+- Matplotlib
+- Seaborn
+- Jupyter Notebook
+
+---
+
+## 🛠️ Getting Started
+
+To run this notebook:
 
 ### 🔹 Clone the Repository
 
 ```bash
 git clone https://github.com/Srishankar123/EDA-Projects.git
-cd EDA-Projects
+cd "EDA on layoffs dataset"
 ```
 
-### 🔹 Set Up Your Environment
-
-It’s recommended to use a virtual environment:
+### 🔹 Set Up Environment
 
 ```bash
-python -m venv venv
-source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-```
-
-### 🔹 Install Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-> If there is no `requirements.txt`, you can manually install common packages:
-
-```bash
-pip install pandas matplotlib seaborn jupyter notebook
-```
-
-### 🔹 Launch Jupyter Notebook
-
-```bash
+pip install pandas matplotlib seaborn jupyter
 jupyter notebook
 ```
 
-Open any `.ipynb` file to explore the analysis.
-
----
-
-## 📁 Project Structure
-
-Each folder or notebook represents a separate EDA project and includes:
-
-- Dataset or data source link
-- Data cleaning steps
-- Exploratory analysis
-- Charts and graphs
-- Summary of insights
+Then open the notebook file (`EDA_layoffs.ipynb` or similar) to explore the analysis.
 
 ---
 
 ## 📄 License
 
-This repository is intended for **learning and educational purposes**.  
-You're free to use and modify the code with proper credit.
+This project is for educational and personal use.  
+You are welcome to explore, fork, and adapt it with credit.
 
 ---
 
@@ -82,4 +82,4 @@ You're free to use and modify the code with proper credit.
 - 💻 [GitHub](https://github.com/Srishankar123)
 - 📧 srishankarloknath@gmail.com
 
-Let's connect and explore data together! 📈
+Let’s dive into the data together! 📊
