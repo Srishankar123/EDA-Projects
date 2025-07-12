@@ -78,7 +78,7 @@ You are welcome to explore, fork, and adapt it with credit.
 ## 📬 Contact
 
 - 🔗 [Portfolio](https://srishankar.netlify.app)
-- 💼 [LinkedIn](https://www.linkedin.com/in/srishankar-lokanath/)
+- 💼 [LinkedIn](https://linkedin.com/in/srishankar-lokanath-99a5b4252)
 - 💻 [GitHub](https://github.com/Srishankar123)
 - 📧 srishankarloknath@gmail.com
 
